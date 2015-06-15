@@ -1,0 +1,31 @@
+
+%btn
+	background: $yellow
+	border: 0
+	display: inline-block
+	font-family: Roboto Condensed
+	letter-spacing: 1px 
+	text-decoration: none
+	text-transform: uppercase
+	+padding(8px 12px)
+
+	&:link, &:visited
+		color: lighten(black, 20)
+
+	.btn-icon
+		font-size: 1.25em
+		margin-left: 4px
+		display: inline-block
+		font-weight: bold
+		+position(relative, 2px null null null)
+
+.btn
+	@extend %btn
+
+.btn--heavy
+	font-weight: 700
+
+.btn--light
+	font-weight: normal
+
+

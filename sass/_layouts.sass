@@ -1,0 +1,58 @@
+
+.is-hidden
+	display: none !important
+
+.container
+	+container
+	+clearfix
+
+
+
+.hero
+	margin-left: 40%
+	+position(relative, 31% null null null)
+
+	.cta
+		font-size: 18px
+	
+@media screen and (max-width: 1000px)
+	.hero
+		margin-left: 27%
+
+	.hero h1
+		font-size: 60px
+
+@media screen and (max-width: 700px)
+	// .hero
+		// margin-left: 30%
+	.hero h1
+		font-size: 60px
+	.hero .cta
+		font-size: 16px
+
+
+@media screen and (max-width: 500px)
+	.hero
+		margin-left: 16px
+	.hero h1
+		font-size: 44px
+
+
+
+
+.question
+	color: $yellow
+	display: inline-block
+	font-size: 100px
+	font-weight: 900
+	text-transform: uppercase
+	+margin(0)
+	span
+		background: black
+		display: inline-block
+		+padding(4px 20px)
+		margin-bottom: 8px
+
+
+
+
