@@ -1,10 +1,11 @@
+# Splash Page and Modal
+A fun exercise by [DevTips](https://github.com/DevTips). 
 
-A fun exercise by [DevTips](https://github.com/DevTips/splash-page-and-modal).
+A live preview of my version can be seen here [seen here](http://kindaswiss.github.io/splash-page-and-modal/).
 
-
-The first commit is my first version. For the second version, I had some goals. 
 
 ## Goals
+The first commit is my first version. For the second version, I had some goals. 
 
 - Support IE 9+
 - Integrate concepts from ["Making modal windows better for everyone"](http://www.smashingmagazine.com/2014/09/15/making-modal-windows-better-for-everyone/) by SmashingMagazine 
@@ -14,8 +15,7 @@ The first commit is my first version. For the second version, I had some goals.
 - Resume focus to the last active element when the modal closes 
 
 ## Problems
-- On smaller devices, the modal is pushed outside of the overlay, causing the background to peek through. 
-- Chrome will allow a unitless value for the `perspective` property and Firefox and IE don't. 
+- On smaller devices, the modal is pushed outside of the overlay, causing the background to peek through.
 
 ## Tools I Used
 - [VueJS](http://vuejs.org/) for JS
@@ -28,6 +28,7 @@ The first commit is my first version. For the second version, I had some goals.
 ## Things I learned
 
 - Transitions don't work properly when the property doesn't exist beforehand. For example, if transitioning the left property on hover, the left property needs to be defined on the `selector` as well as `selector:hover`
+- Chrome will allow a unitless value for the `perspective` property and Firefox and IE won't. 
 - Focusing or moving an element when it is being transitioned will cause the transition to fail. 
 - VueJS is awesome. 
 - Sass is awesome 
