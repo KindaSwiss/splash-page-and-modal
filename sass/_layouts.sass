@@ -10,32 +10,37 @@
 
 .hero
 	margin-left: 40%
-	+position(relative, 31% null null null)
+	+position(absolute, 31% null null null)
 
 	.cta
 		font-size: 18px
-	
+
 @media screen and (max-width: 1000px)
 	.hero
 		margin-left: 27%
 
 	.hero h1
-		font-size: 60px
+		font-size: 80px
 
 @media screen and (max-width: 700px)
-	// .hero
-		// margin-left: 30%
 	.hero h1
 		font-size: 60px
 	.hero .cta
 		font-size: 16px
 
-
 @media screen and (max-width: 500px)
 	.hero
 		margin-left: 16px
 	.hero h1
-		font-size: 44px
+		font-size: 52px
+
+@media screen and (max-width: 335px)
+	.hero h1
+		font-size: 40px
+	.hero .cta
+		font-size: 13px
+
+
 
 
 
@@ -51,7 +56,46 @@
 		background: black
 		display: inline-block
 		+padding(4px 20px)
-		margin-bottom: 8px
+		margin-bottom: 10px
+
+
+// The z-index is declared because if the mouse is left 
+// on it when the modal is shown, the cursor will still be 
+// pointer. Putting the z-index lower than the modal fixes it. 
+#learn-more
+	
+	z-index: 1
+	+position(relative)
+	// How far to push the after element outside it's container 
+	$push: -2px
+	// The transition time 
+	$time: 0.4s
+	// The inner icon's left position 
+	$left: 6px
+
+	// Styles for when the element is tabbed to  
+	&:focus
+		outline: 0
+	&:focus:after
+		box-shadow: 0 0 0 2px $yellow
+	&:focus i
+		left: $left
+
+	// Styles for when the element is hovered on 
+	&:after
+		content: ' '
+		+position(absolute, $push)
+		+transition($time)
+	&:hover:after
+		z-index: 2
+		box-shadow: 0 0 0 2px $yellow
+	& i
+		position: relative
+		left: 0px
+		+transition($time)
+	&:hover i
+		left: $left
+
 
 
 

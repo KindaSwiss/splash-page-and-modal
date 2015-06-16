@@ -2,47 +2,28 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="stylesheets/main.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700|Roboto:300italic,400italic,600italic,700italic,400,300,600,700,900' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="stylesheets/unsupported.min.css">
+	<![endif]-->
+	<noscript>
+		<link rel="stylesheet" href="stylesheets/unsupported.min.css">
+	</noscript>
+
 	<title>Splash</title>
 </head>
 <body>
-	
-	<div id="modal-overlay" class="is-hidden" v-on="click:hide">
-		<div id="modal--subscribe" class="modal">
-
-			<div class="modal__wrapper">
-				<!-- Close button -->
-				<i class="ion-close modal__close container"
-					v-on="click:hide"></i>
-
-				<div class="modal__container">
-					<div class="modal__content">
-						<header class="modal__header">
-							Business stuff in your inbox, all the time.
-						</header>
-						<p class="modal__description">
-							Sign up for our newsletter so download this 200+ page secrets of business PDF!
-						</p>
-					</div>
-				</div>
-
-				<form class="modal__form" action="">
-					<input v-el="input" v-on="keydown: onKeyDown" autocomplete="off" type="text" name="email" placeholder="Email">
-					<button id="" class="btn" type="submit">Submit</button>
-				</form>
-
-			</div> <!-- outer-container -->
-		</div> <!-- .modal -->
-
-	</div> <!-- #modal-overlay -->
-
-
-
-
-
-
+	<!--[if lt IE 9]>
+		<div id="sorry"> Sorry, your browser is not supported. Consider switching to Chrome or Firefox to view this web page. </div>
+	<![endif]-->
+	<noscript>
+		<div id="sorry"> Sorry, this page needs JavaScript enabled in order to function properly. Please enable JavaScript to view this page. </div>
+	</noscript>
 
 	<div class="container hero">
 		<h1 class="question">
@@ -60,8 +41,48 @@
 		</div>
 	</div>
 
+	
+	<div role="alertdialog" 
+		aria-labelledby="modal__suscribe-header modal__suscribe-description" 
+		aria-hidden="true" 
+		id="modal-overlay" 
+		class="modal-overlay is-hidden" 
+		v-on="click:hide">
+		<div tabindex="-1" id="modal--subscribe" class="modal">
+
+			<div class="modal__wrapper">
+				<!-- Close button -->
+				<button 
+					aria-label="close" 
+					role="button" 
+					class="ion-close modal__close" 
+					v-on="click: hide"></button>
+
+				<div class="modal__container">
+					<div class="modal__content">
+						<header id="modal__suscribe-header" class="modal__header">
+							Business stuff in your inbox, all the time.
+						</header>
+						<p  id="modal__suscribe-description" class="modal__description">
+							Sign up for our newsletter so download this 200+ page secrets of business PDF!
+						</p>
+					</div>
+				</div>
+
+				<form class="modal__form" action="">
+					<input tabindex="0" aria-label="email" v-on="keydown: onKeyDown" autocomplete="off" type="text" name="email" placeholder="Email">
+					<button aria-label="submit" id="" class="btn" type="submit" v-on="click: submit($event)">Submit</button>
+				</form>
+
+			</div> <!-- outer-container -->
+		</div> <!-- .modal -->
+	</div> <!-- #modal-overlay -->
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.12.1/vue.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 	<script src="javascripts/main.js"></script>
 </body>
 </html>

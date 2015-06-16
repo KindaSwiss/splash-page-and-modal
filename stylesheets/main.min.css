@@ -387,7 +387,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero {
   margin-left: 40%;
-  position: relative;
+  position: absolute;
   top: 31%; }
   .hero .cta {
     font-size: 18px; }
@@ -396,7 +396,7 @@ h1, h2, h3, h4, h5, h6 {
   .hero {
     margin-left: 27%; }
   .hero h1 {
-    font-size: 60px; } }
+    font-size: 80px; } }
 
 @media screen and (max-width: 700px) {
   .hero h1 {
@@ -408,7 +408,13 @@ h1, h2, h3, h4, h5, h6 {
   .hero {
     margin-left: 16px; }
   .hero h1 {
-    font-size: 44px; } }
+    font-size: 52px; } }
+
+@media screen and (max-width: 335px) {
+  .hero h1 {
+    font-size: 40px; }
+  .hero .cta {
+    font-size: 13px; } }
 
 .question {
   color: #f2e30c;
@@ -421,7 +427,34 @@ h1, h2, h3, h4, h5, h6 {
     background: black;
     display: inline-block;
     padding: 4px 20px;
-    margin-bottom: 8px; }
+    margin-bottom: 10px; }
+
+#learn-more {
+  z-index: 1;
+  position: relative; }
+  #learn-more:focus {
+    outline: 0; }
+  #learn-more:focus:after {
+    box-shadow: 0 0 0 2px #f2e30c; }
+  #learn-more:focus i {
+    left: 6px; }
+  #learn-more:after {
+    content: ' ';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    transition: 0.4s; }
+  #learn-more:hover:after {
+    z-index: 2;
+    box-shadow: 0 0 0 2px #f2e30c; }
+  #learn-more i {
+    position: relative;
+    left: 0px;
+    transition: 0.4s; }
+  #learn-more:hover i {
+    left: 6px; }
 
 .btn {
   background: #f2e30c;
@@ -454,7 +487,6 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   font-family: 'Roboto Condensed';
   letter-spacing: 1px;
   width: 100%;
-  z-index: 3;
   position: relative;
   padding: 8px 16px; }
   input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus {
@@ -462,24 +494,48 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
 
 #modal-overlay {
   background-color: rgba(242, 227, 12, 0.9);
-  z-index: 1;
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+  z-index: 2;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  -webkit-transition: 20s;
-  transition: 20s; }
+  transition: opacity 0.7s; }
+
+.modal-overlay[aria-hidden='false'] {
+  opacity: 1; }
+  .modal-overlay[aria-hidden='false'] .modal {
+    top: 150px;
+    -webkit-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-transform-origin: center;
+        -ms-transform-origin: center;
+            transform-origin: center; }
+
+.modal-overlay[aria-hidden='true'] {
+  opacity: 0;
+  pointer-events: none; }
 
 .modal {
-  z-index: 2;
+  z-index: 3;
+  outline: 0;
   max-width: 35em;
   margin-left: auto;
   margin-right: auto;
   padding-right: 16px;
   padding-left: 16px;
   position: relative;
-  top: 150px; }
+  top: 0px;
+  transition: top 0.7s, -webkit-transform 0.7s;
+  transition: top 0.7s, transform 0.7s;
+  -webkit-transform: rotateX(-50deg);
+  -ms-transform: rotateX(-50deg);
+  transform: rotateX(-50deg); }
   .modal:after {
     content: " ";
     display: block;
@@ -491,17 +547,21 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   position: relative; }
 
 .modal__close {
+  background: transparent;
+  border: 0;
+  outline: 0;
   cursor: pointer;
   font-size: 1.5rem;
   position: absolute;
   top: -1.8rem;
   right: -1.8rem;
-  -webkit-transition: right 0.5s;
-  transition: right 0.5s; }
+  transition: right 0.5s, box-shadow 0.3s; }
   .modal__close:after {
     content: "";
     display: table;
     clear: both; }
+  .modal__close:focus {
+    box-shadow: 0 0 0 3px black; }
 
 .modal__content {
   height: 100%;
@@ -528,7 +588,6 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   .modal__form input, .modal__form button {
     display: inline-block;
     padding: 12px 30px;
-    -webkit-transition: box-shadow 0.17s ease-in;
     transition: box-shadow 0.17s ease-in; }
   .modal__form input {
     max-width: 72.5%;
@@ -544,10 +603,8 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    .modal__form button:active {
+    .modal__form button:active, .modal__form button:focus {
       box-shadow: 0 0 0 2px black, 0 0 0 4px #f2e30c;
-      outline: 0; }
-    .modal__form button:focus {
       outline: 0; }
 
 #modal--subscribe .modal__container {
@@ -582,3 +639,7 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
     max-width: 100%; }
   #modal--subscribe .modal__container {
     background-image: none; } }
+
+@media screen and (orientation: portrait) and (max-width: 400px), screen and (orientation: landscape) and (max-width: 600px) {
+  .modal {
+    top: 50px !important; } }

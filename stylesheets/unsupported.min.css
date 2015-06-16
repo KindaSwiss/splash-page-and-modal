@@ -1,0 +1,13 @@
+* {
+  display: none; }
+
+#sorry {
+  display: block !important;
+  display: block;
+  font-size: 32px;
+  color: black; }
+
+body, html {
+  padding: 8px;
+  display: block;
+  background: 0; }
