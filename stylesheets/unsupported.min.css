@@ -1,3 +1,11 @@
+/**
+ * file: unsupported.sass
+ *
+ * A stylesheet for when the browser is not supported
+ * or javascript is disabled.
+ * Only a message (#sorry) will be displayed with this
+ * stylesheet.
+ */
 * {
   display: none; }
 

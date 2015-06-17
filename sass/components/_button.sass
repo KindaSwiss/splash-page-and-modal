@@ -1,0 +1,126 @@
+/**
+ * file: _button.sass
+ * 
+ * Contains styles for buttons 
+ * 
+ */
+
+$btn-transition-time: 0.4s
+
+
+/**
+ * 1. How far to push :after outside it's container. The 
+ * purpose of this is to have a few pixels of transparency 
+ * before the box shadow. 
+ */
+.btn
+	$push: -2px // [1] 
+	background: $yellow
+	border: 0
+	display: inline-block
+	font-family: Roboto Condensed
+	letter-spacing: 1px 
+	text-decoration: none
+	text-transform: uppercase
+	+padding(8px 12px)
+	+position(relative)
+	+transition(box-shadow $btn-transition-time)
+
+	&:link, &:visited
+		color: lighten(black, 20)
+
+	// Styles for when the element is tabbed to  
+	&:focus
+		outline: 0
+	&:focus:after
+		box-shadow: 0 0 0 2px $yellow
+
+	// Styles for when the element is hovered on 
+	&:after
+		content: ' '
+		+position(absolute, $push)
+		+transition(box-shadow $btn-transition-time)
+	&:hover:after
+		z-index: 2
+		box-shadow: 0 0 0 2px $yellow
+
+
+.btn--heavy
+	font-weight: 700
+
+
+
+
+
+/**
+ * 1. Offset the top to make it inline with text 
+ */
+.btn__icon
+	font-size: 1.25em
+	display: inline-block
+	font-weight: bold
+	+position(relative, 2px null null null) /* [1] */ 
+
+
+/**
+ * Push the icon just a tiny bit when on the right of the 
+ * btn's text
+ */
+.btn__icon--right
+	margin-left: 4px
+
+
+	
+	
+	
+
+
+/**
+ * 1. The inner icon's left position after hover 
+ * 
+ * 2. The z-index is declared because if the mouse is left 
+ * on it when the modal is shown, the cursor will still 
+ * be pointer. Putting the z-index lower than the modal 
+ * fixes it. 
+ *
+ * 3. Must set the property on the element and on focus
+ * or else the transition won't work. 
+ */
+.btn--cta
+	$icon-left: 6px // [1] 
+	font-size: 18px
+	z-index: z('default') /* [2] */
+	+position(relative)
+
+	// Inner icon styles 
+	& i
+		position: relative
+		left: 0px /* [3] */
+		+transition(left $btn-transition-time)
+
+	&:hover i
+		left: $icon-left /* [1] */
+
+	&:focus i
+		left: $icon-left /* [1] */
+
+
+
+
+
+/**
+ * Make the buttons smaller on smaller screen sizes. 
+ */
+@media screen and (max-width: 700px)
+	.btn--cta
+		font-size: 16px
+@media screen and (max-width: 335px)
+	.btn--cta
+		font-size: 13px
+
+
+
+
+
+
+

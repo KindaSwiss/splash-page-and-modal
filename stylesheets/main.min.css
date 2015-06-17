@@ -1,3 +1,10 @@
+/**
+ *  This has the same purpose as `pass` does in python.
+ *  It's so I can delcare a selector and not have any properties
+ */
+/**
+ * Disallow text selection
+ */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -352,11 +359,12 @@ td,
 th {
   padding: 0; }
 
+/**
+ * file: _base.sass
+ *
+ */
 * {
   box-sizing: border-box; }
-
-body, html {
-  height: 100%; }
 
 body {
   background-image: url("../images/bg.jpg");
@@ -367,119 +375,7 @@ body {
   font-family: Roboto; }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-bottom: 16px; }
-
-.is-hidden {
-  display: none !important; }
-
-.container {
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto; }
-  .container:after {
-    content: " ";
-    display: block;
-    clear: both; }
-  .container:after {
-    content: "";
-    display: table;
-    clear: both; }
-
-.hero {
-  margin-left: 40%;
-  position: absolute;
-  top: 31%; }
-  .hero .cta {
-    font-size: 18px; }
-
-@media screen and (max-width: 1000px) {
-  .hero {
-    margin-left: 27%; }
-  .hero h1 {
-    font-size: 80px; } }
-
-@media screen and (max-width: 700px) {
-  .hero h1 {
-    font-size: 60px; }
-  .hero .cta {
-    font-size: 16px; } }
-
-@media screen and (max-width: 500px) {
-  .hero {
-    margin-left: 16px; }
-  .hero h1 {
-    font-size: 52px; } }
-
-@media screen and (max-width: 335px) {
-  .hero h1 {
-    font-size: 40px; }
-  .hero .cta {
-    font-size: 13px; } }
-
-.question {
-  color: #f2e30c;
-  display: inline-block;
-  font-size: 100px;
-  font-weight: 900;
-  text-transform: uppercase;
-  margin: 0; }
-  .question span {
-    background: black;
-    display: inline-block;
-    padding: 4px 20px;
-    margin-bottom: 10px; }
-
-#learn-more {
-  z-index: 1;
-  position: relative; }
-  #learn-more:focus {
-    outline: 0; }
-  #learn-more:focus:after {
-    box-shadow: 0 0 0 2px #f2e30c; }
-  #learn-more:focus i {
-    left: 6px; }
-  #learn-more:after {
-    content: ' ';
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    bottom: -2px;
-    left: -2px;
-    transition: 0.4s; }
-  #learn-more:hover:after {
-    z-index: 2;
-    box-shadow: 0 0 0 2px #f2e30c; }
-  #learn-more i {
-    position: relative;
-    left: 0px;
-    transition: 0.4s; }
-  #learn-more:hover i {
-    left: 6px; }
-
-.btn {
-  background: #f2e30c;
-  border: 0;
-  display: inline-block;
-  font-family: Roboto Condensed;
-  letter-spacing: 1px;
-  text-decoration: none;
-  text-transform: uppercase;
-  padding: 8px 12px; }
-  .btn:link, .btn:visited {
-    color: #333333; }
-  .btn .btn-icon {
-    font-size: 1.25em;
-    margin-left: 4px;
-    display: inline-block;
-    font-weight: bold;
-    position: relative;
-    top: 2px; }
-
-.btn--heavy {
-  font-weight: 700; }
-
-.btn--light {
-  font-weight: normal; }
+  margin-bottom: 1rem; }
 
 input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"] {
   background: white;
@@ -492,11 +388,179 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus {
     outline: 0; }
 
+/**
+ * file: _layouts.sass
+ *
+ */
+/**
+ * General styles
+ */
+.is-hidden {
+  display: none !important; }
+
+.float-right {
+  float: right; }
+
+.float-left {
+  float: left; }
+
+/**
+ * Styles for the hero
+ *
+ * 1.
+ *
+ */
+.hero {
+  margin-left: 40%;
+  position: absolute;
+  top: 31%; }
+
+.hero__title {
+  color: #f2e30c;
+  display: inline-block;
+  font-size: 100px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0; }
+  .hero__title span {
+    background: black;
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 4px 20px; }
+
+/**
+ * The following media queries make sure that the
+ * hero heading stays inside the body. It is also
+ * for Making sure the hero_cta button
+ */
+@media screen and (max-width: 1000px) {
+  .hero {
+    margin-left: 27%; }
+  .hero__title {
+    font-size: 80px; } }
+
+@media screen and (max-width: 700px) {
+  .hero__title {
+    font-size: 60px; } }
+
+@media screen and (max-width: 500px) {
+  .hero {
+    margin-left: 16px; }
+  .hero__title {
+    font-size: 52px; } }
+
+@media screen and (max-width: 335px) {
+  .hero__title {
+    font-size: 40px; } }
+
+/**
+ * file: _button.sass
+ *
+ * Contains styles for buttons
+ *
+ */
+/**
+ * 1. How far to push :after outside it's container. The
+ * purpose of this is to have a few pixels of transparency
+ * before the box shadow.
+ */
+.btn {
+  background: #f2e30c;
+  border: 0;
+  display: inline-block;
+  font-family: Roboto Condensed;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  position: relative;
+  transition: box-shadow 0.4s; }
+  .btn:link, .btn:visited {
+    color: #333333; }
+  .btn:focus {
+    outline: 0; }
+  .btn:focus:after {
+    box-shadow: 0 0 0 2px #f2e30c; }
+  .btn:after {
+    content: ' ';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    transition: box-shadow 0.4s; }
+  .btn:hover:after {
+    z-index: 2;
+    box-shadow: 0 0 0 2px #f2e30c; }
+
+.btn--heavy {
+  font-weight: 700; }
+
+/**
+ * 1. Offset the top to make it inline with text
+ */
+.btn__icon {
+  font-size: 1.25em;
+  display: inline-block;
+  font-weight: bold;
+  position: relative;
+  top: 2px;
+  /* [1] */ }
+
+/**
+ * Push the icon just a tiny bit when on the right of the
+ * btn's text
+ */
+.btn__icon--right {
+  margin-left: 4px; }
+
+/**
+ * 1. The inner icon's left position after hover
+ *
+ * 2. The z-index is declared because if the mouse is left
+ * on it when the modal is shown, the cursor will still
+ * be pointer. Putting the z-index lower than the modal
+ * fixes it.
+ *
+ * 3. Must set the property on the element and on focus
+ * or else the transition won't work.
+ */
+.btn--cta {
+  font-size: 18px;
+  z-index: 1;
+  position: relative; }
+  .btn--cta i {
+    position: relative;
+    left: 0px;
+    transition: left 0.4s; }
+  .btn--cta:hover i {
+    left: 6px; }
+  .btn--cta:focus i {
+    left: 6px; }
+
+/**
+ * Make the buttons smaller on smaller screen sizes.
+ */
+@media screen and (max-width: 700px) {
+  .btn--cta {
+    font-size: 16px; } }
+
+@media screen and (max-width: 335px) {
+  .btn--cta {
+    font-size: 13px; } }
+
+/**
+ * file: _modal.sass
+ *
+ */
+/**
+ * The overlay that contains the modal.
+ */
 #modal-overlay {
   background-color: rgba(242, 227, 12, 0.9);
   -webkit-perspective: 1000px;
           perspective: 1000px;
-  z-index: 2;
+  z-index: 5000;
   position: absolute;
   top: 0;
   right: 0;
@@ -504,6 +568,21 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   left: 0;
   transition: opacity 0.7s; }
 
+/**
+ * This sets up the overlay transitions.
+ * When aria-hidden is `false`, the overlay is
+ * transitioned from opacity 0 to 1, and the modal
+ * is slide/flipped down. The opposite happens when aria-hidden
+ * is set to `true`.
+ *
+ * 1. There is a fallback to pointer events in the javascript
+ * file. The fallback is just to set the overlay to display none.
+ * In IE 9, where pointer-events aren't supported, but transitions
+ * are supported, the modal will fade-in/slide/flip, but will not
+ * transition back out.
+ *
+ *
+ */
 .modal-overlay[aria-hidden='false'] {
   opacity: 1; }
   .modal-overlay[aria-hidden='false'] .modal {
@@ -520,9 +599,13 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
 .modal-overlay[aria-hidden='true'] {
   opacity: 0;
   pointer-events: none; }
+  .modal-overlay[aria-hidden='true'] .modal {
+    -webkit-transform: rotateX(-50deg);
+    -ms-transform: rotateX(-50deg);
+    transform: rotateX(-50deg); }
 
 .modal {
-  z-index: 3;
+  z-index: 5001;
   outline: 0;
   max-width: 35em;
   margin-left: auto;
@@ -532,20 +615,29 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   position: relative;
   top: 0px;
   transition: top 0.7s, -webkit-transform 0.7s;
-  transition: top 0.7s, transform 0.7s;
-  -webkit-transform: rotateX(-50deg);
-  -ms-transform: rotateX(-50deg);
-  transform: rotateX(-50deg); }
+  transition: top 0.7s, transform 0.7s; }
   .modal:after {
     content: " ";
     display: block;
     clear: both; }
 
+/**
+ * The wrapper is where the white background starts
+ */
 .modal__wrapper {
   background-color: white;
   box-shadow: 0px 12px 16px rgba(0, 0, 0, 0.3);
   position: relative; }
 
+/**
+ *
+ * 1. This calculates the close button to be above the modal,
+ * plus little more for extra space.
+ *
+ * 2. This calculates the close button to be passed the right
+ * edge of the modal, plus a litter more for extra space.
+ *
+ */
 .modal__close {
   background: transparent;
   border: 0;
@@ -556,28 +648,30 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   top: -1.8rem;
   right: -1.8rem;
   transition: right 0.5s, box-shadow 0.3s; }
-  .modal__close:after {
-    content: "";
-    display: table;
-    clear: both; }
   .modal__close:focus {
     box-shadow: 0 0 0 3px black; }
 
+/**
+ * 1. This is so the background image can show,
+ * if one is defined.
+ */
 .modal__content {
   height: 100%;
   padding: 30px; }
   .modal__content .modal__header {
     font-weight: 600;
     font-size: 1.3rem;
-    margin-bottom: 30px;
-    max-width: 45%; }
+    margin-bottom: 30px; }
   .modal__content .modal__description {
     color: #666666;
     font-weight: 300;
     font-size: .95rem;
-    margin-bottom: 30px;
-    max-width: 60%; }
+    margin-bottom: 30px; }
 
+/**
+ * 1. The clearfix is added because the button is floated right
+ *
+ */
 .modal__form {
   background-color: black;
   padding: 20px; }
@@ -587,52 +681,62 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
     clear: both; }
   .modal__form input, .modal__form button {
     display: inline-block;
-    padding: 12px 30px;
-    transition: box-shadow 0.17s ease-in; }
+    padding: 12px 30px; }
   .modal__form input {
     max-width: 72.5%;
-    display: inline-block; }
+    display: inline-block;
+    transition: box-shadow 0.17s ease-in; }
     .modal__form input:focus {
       box-shadow: 0 0 0 2px black, 0 0 0 4px #f2e30c;
       outline: 0; }
-  .modal__form button {
-    float: right;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none; }
-    .modal__form button:active, .modal__form button:focus {
-      box-shadow: 0 0 0 2px black, 0 0 0 4px #f2e30c;
-      outline: 0; }
 
+/**
+ * Customize the modal's background here
+ */
 #modal--subscribe .modal__container {
   background-image: url("../images/presentation.png");
   background-position: 140% 60%;
   background-size: 57%;
   background-repeat: no-repeat; }
+  #modal--subscribe .modal__container .modal__header {
+    max-width: 45%; }
+  #modal--subscribe .modal__container .modal__description {
+    max-width: 60%; }
 
+/**
+ * Move the close button to the top of the modal
+ */
 @media screen and (max-width: 650px) {
   .modal__close {
     top: -2rem;
     right: 0px; } }
 
 @media screen and (max-width: 650px) {
+  /**
+	 * Put the input and button on separate lines
+	 * The input should go full width of the form
+	 * but the button should be the same size
+	 */
   .modal__form {
     max-width: 100%; }
     .modal__form input {
       max-width: 100%;
       display: block; }
     .modal__form button {
-      float: right;
       margin-top: 20px; } }
 
+/**
+ * Now make the submit button full width
+ */
 @media screen and (max-width: 400px) {
   .modal__form button {
     float: none;
     width: 100%; } }
 
+/**
+ * Make the header and description full width and
+ * remove the background image.
+ */
 @media screen and (max-width: 571px) {
   .modal__content .modal__description,
   .modal__content .modal__header {

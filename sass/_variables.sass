@@ -1,4 +1,7 @@
 
+/**
+ * Disallow text selection 
+ */
 =no-select
 	-webkit-touch-callout: none
 	-webkit-user-select: none
@@ -7,32 +10,26 @@
 	-ms-user-select: none
 	user-select: none
 
-=pass
-	pass: pass
 
 
 
-
-
-
-
-// Default 
-$susy: (columns: 12, gutters: (1/4), math: fluid, output: float, gutter-position: split)
-
-
-
-// Sizes 
+// Sizes for media queries or containers 
 $largest: 1160px
 $large: 960px
 $medium: 600px
 $small: 320px
-
 $sizes: (largest: $largest, large: $large, medium: $medium, small: $small)
 
 
+// Colors 
 $yellow: #f2e30c
-
-
 $color-text: lighten(black, 30)
+
+
+
+$z-indexes: ('modal': 5001, 'overlay': 5000, 'default': 1, 'below': -1)
+
+
+
 
 

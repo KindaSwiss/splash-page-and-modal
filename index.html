@@ -28,29 +28,35 @@
 	</noscript>
 
 	<div class="container hero">
-		<h1 class="question">
+		<h1 class="hero__title">
 			<span class="first">Good at </span>
 			<br>
 			<span class="second">business?</span>
 		</h1>
 
 		<div>
-			<a id="learn-more" class="cta btn btn--heavy" 
+			<a id="learn-more" class="btn btn--cta btn--heavy" 
 				href="#learn-more" v-on="click:onClick">
 				Learn More Now 
-				<i class="btn-icon ion-ios-arrow-forward"></i>
+				<i class="btn__icon btn__icon--right ion-ios-arrow-forward"></i>
 			</a>
 		</div>
 	</div>
 
-	
+	<!-- 
+		We want the modal to have a tab index of -1 so it 
+		can be focused but not tabbed to. 
+	 -->
 	<div role="alertdialog" 
 		aria-labelledby="modal__suscribe-header modal__suscribe-description" 
 		aria-hidden="true" 
 		id="modal-overlay" 
 		class="modal-overlay is-hidden" 
-		v-on="click:hide">
-		<div tabindex="-1" id="modal--subscribe" class="modal">
+		tabindex="-1" 
+		v-on="click:hide, focusout:onFocusOut">
+
+		
+		<div id="modal--subscribe" class="modal">
 
 			<div class="modal__wrapper">
 				<!-- Close button -->
@@ -65,15 +71,29 @@
 						<header id="modal__suscribe-header" class="modal__header">
 							Business stuff in your inbox, all the time.
 						</header>
-						<p  id="modal__suscribe-description" class="modal__description">
+						<p id="modal__suscribe-description" class="modal__description">
 							Sign up for our newsletter so download this 200+ page secrets of business PDF!
 						</p>
 					</div>
 				</div>
 
 				<form class="modal__form" action="">
-					<input tabindex="0" aria-label="email" v-on="keydown: onKeyDown" autocomplete="off" type="text" name="email" placeholder="Email">
-					<button aria-label="submit" id="" class="btn" type="submit" v-on="click: submit($event)">Submit</button>
+					<input 
+						aria-label="email" 
+						tabindex="0" 
+						autocomplete="off" 
+						name="email" 
+						placeholder="Email"
+						type="text" 
+						v-on="keydown: onKeyDown">
+					<button 
+						aria-label="submit" 
+						class="btn float-right" 
+						type="submit" 
+						v-on="click: submit"
+					>
+						Submit
+					</button>
 				</form>
 
 			</div> <!-- outer-container -->

@@ -33,6 +33,8 @@ $(function () {
 			lastActive: null,
 		},
 		methods: {
+
+			
 			/**
 			 * Hide the modal 
 			 * @return {void} 
@@ -52,12 +54,17 @@ $(function () {
 					}
 					this.showing = false;
 					this.lastActive.focus();
-					this.ui.el
-						.removeAttr('tabindex')
-						.attr('aria-hidden', true);
+					setTimeout(function () {
+						this.ui.el
+							.attr('tabindex', '-1')
+							.attr('aria-hidden', true);
+
+					}.bind(this), 0);
 
 				}
 			},
+
+
 			/**
 			 * Show the modal and focus it so that tabbing will focus the 
 			 * exit button. 
@@ -68,12 +75,16 @@ $(function () {
 				this.ui.el.removeClass('is-hidden');
 				this.showing = true;
 				this.lastActive = document.activeElement;
-				this.ui.el
-					.attr('tabindex', '0')
-					.focus()
-					.attr('aria-hidden', false);
+				setTimeout(function () {
+					this.ui.el
+						.attr('tabindex', '0')
+						.focus()
+						.attr('aria-hidden', false);
+				}.bind(this), 0);
 
 			},
+
+
 			/**
 			 * When the submit button is pressed, hide the modal 
 			 * @param  {Event} event 
@@ -82,7 +93,7 @@ $(function () {
 			submit: function (event) {
 				event.preventDefault();
 				this.hide();
-			}
+			},
 		},
 		attached: function () {
 			var el = $(this.$el);
@@ -102,7 +113,7 @@ $(function () {
 					that.ui.el.addClass('is-hidden');
 				}
 			});
-		}
+		},
 	});
 
 
@@ -128,13 +139,11 @@ $(function () {
 			}
 		}
 	});
-
 	// Keep focus within the modal 
 	$(window).on('focusin', function (event) {
 		var overlay = suscribeModal.ui.el[0];
 		var contains = $.contains(overlay, event.target) || event.target === overlay;
 		if (suscribeModal.showing && ! contains) {
-			event.stopPropagation();
 			suscribeModal.ui.el.focus();
 		}
 	});

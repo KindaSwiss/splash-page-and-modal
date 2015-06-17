@@ -1,7 +1,7 @@
 # Splash Page and Modal
 A fun exercise by [DevTips](https://github.com/DevTips). 
 
-A live preview of my version can be seen here [seen here](http://kindaswiss.github.io/splash-page-and-modal/).
+A live preview of my version can be seen here [seen here](http://kindaswiss.github.io/splash-page-and-modal/). 
 
 
 ## Goals
@@ -16,11 +16,13 @@ The first commit is my first version. For the second version, I had some goals.
 
 ## Problems
 - On smaller devices, the modal is pushed outside of the overlay, causing the background to peek through.
+- The URL bar can't be focused when the modal is showing. 
 
 ## Tools I Used
 - [VueJS](http://vuejs.org/) for JS
 - [JQuery](https://jquery.com/) for DOM manipulation
 - [Sass](http://sass-lang.com/guide) indented
+- [BEM](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) for CSS class names
 - [Gulp](https://github.com/gulpjs/gulp) For processing Sass files and linting JS
 - [Modernizr](http://modernizr.com/) to detect if pointerevents are defined 
 
@@ -33,9 +35,6 @@ The first commit is my first version. For the second version, I had some goals.
 - VueJS is awesome. 
 - Sass is awesome 
 - [DevTips](https://www.youtube.com/user/DevTipsForDesigners) is awesome 
-
-
-
 
 
 
