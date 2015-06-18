@@ -3,36 +3,11 @@
 'use strict';
 
 
-/**
- * A mixin to create jquery objects from selectors
- * Example usage:
- * 		data: {
- * 			ui: {
- * 				close: 'btn.close',
- * 				input: 'input[type=submit]'
- * 			},
- * 		}
- * 
- * @type {Object}
- */
-var jui = {
+var ui = {
 	attached: function () {
-		if (typeof jQuery !== 'function') {
-			var err = new Error('jui: jQuery is not defined');
-			throw err;
-		}
-
-		// Replace the selectors with jquery objects 
-		_.forIn(this.ui, function (selector, name) {
-			this.ui[name] = jQuery(selector);
-		}, this);
-
-		// Set the attached element as well 
-		this.ui.el = jQuery(this.$el);
+		this.ui = this.$$;
 	}
 };
-
-
 
 /**
  * Listens to the events specified on the window object. 
@@ -109,14 +84,19 @@ $(function () {
 	}());
 
 
-	var overlay = new Vue({
+	var overlay = window.overlay = new Vue({
 		el: '#modal-overlay',
 
 
-		mixins: [jui, windowEvents],
+		mixins: [ui, windowEvents],
 
 
 		data: {
+			tabIndex: '-1',
+			ariaHidden: 'true',
+
+
+			isHidden: true,
 			/**
 			 * Whether or not the modal is showing 
 			 * @type {Boolean}
@@ -130,16 +110,6 @@ $(function () {
 			 * @type {Element}
 			 */
 			lastActive: null,
-
-
-			/**
-			 * jui mixin turns these into jquery objects 
-			 */
-			ui: {
-				modal: '.modal',
-				input: 'input',
-				close: '.modal__close'
-			},
 
 
 			/**
@@ -162,14 +132,14 @@ $(function () {
 			 */
 			hide: function(event) {
 
-				if ( ! event || ~[this.$el, this.ui.close.get(0)].indexOf(event.target)) {
+				if ( ! event || ~[this.$el, this.ui.close].indexOf(event.target)) {
 
 					/**
 					 * If CSS pointer events are not supported the element 
 					 * will be hidden. 
 					 */
 					if ( ! csspointerevents) {
-						this.ui.el.addClass('is-hidden');
+						this.isHidden = true;
 					}
 					this.showing = false;
 					/**
@@ -177,9 +147,8 @@ $(function () {
 					 * was opened 
 					 */
 					this.lastActive.focus();
-					this.ui.el
-						.attr('tabindex', '-1')
-						.attr('aria-hidden', true);
+					this.tabIndex = '-1';
+					this.ariaHidden = 'true';
 				}
 			},
 
@@ -191,15 +160,14 @@ $(function () {
 			 * @return {void} 
 			 */
 			show: function() {
-				this.ui.el.removeClass('is-hidden');
+				this.isHidden = false;
 				this.showing = true;
 				this.lastActive = document.activeElement;
-				setTimeout(function () {
-					this.ui.el
-						.attr('tabindex', '0')
-						.focus()
-						.attr('aria-hidden', false);
-				}.bind(this), 0);
+				this.$nextTick(function () {
+					this.tabIndex = '0';
+					this.$el.focus()
+					this.ariaHidden = 'false';
+				});
 
 			},
 
@@ -255,7 +223,7 @@ $(function () {
 			transitionend: function (event) {
 				if (event.target !== this.$el) { return; }
 				if ( ! that.showing) {
-					that.ui.el.addClass('is-hidden');
+					this.isHidden = true;
 				}
 			}
 		},
