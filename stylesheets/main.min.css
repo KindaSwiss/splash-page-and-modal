@@ -702,14 +702,14 @@ button::moz-focus-inner {
 /**
  * Customize the modal's background here
  */
-#modal-subscribe .modal__container {
+.modal-suscribe-container {
   background-image: url("../images/presentation.png");
   background-position: 140% 60%;
   background-size: 57%;
   background-repeat: no-repeat; }
-  #modal-subscribe .modal__container .modal__header {
+  .modal-suscribe-container .modal__header {
     max-width: 45%; }
-  #modal-subscribe .modal__container .modal__description {
+  .modal-suscribe-container .modal__description {
     max-width: 60%; }
 
 /**
