@@ -385,8 +385,14 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   width: 100%;
   position: relative;
   padding: 8px 16px; }
-  input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus {
-    outline: 0; }
+
+input,
+button,
+input::moz-focus-inner,
+button::moz-focus-inner {
+  margin: 0;
+  border: 0;
+  padding: 0; }
 
 /**
  * file: _layouts.sass
@@ -459,7 +465,9 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
  * Contains styles for buttons
  *
  */
-/**
+/*
+ * Base style for a button
+ *
  * 1. How far to push :after outside it's container. The
  * purpose of this is to have a few pixels of transparency
  * before the box shadow.
@@ -467,16 +475,20 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
 .btn {
   background: #f2e30c;
   border: 0;
+  color: #262626;
+  cursor: pointer;
   display: inline-block;
   font-family: Roboto Condensed;
+  font-size: 1em;
   letter-spacing: 1px;
   text-decoration: none;
   text-transform: uppercase;
+  vertical-align: middle;
   padding: 8px 12px;
   position: relative;
   transition: box-shadow 0.4s; }
   .btn:link, .btn:visited {
-    color: #333333; }
+    color: #262626; }
   .btn:focus {
     outline: 0; }
   .btn:focus:after {
@@ -524,9 +536,9 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
  *
  * 3. Must set the property on the element and on focus
  * or else the transition won't work.
+ *
  */
 .btn--cta {
-  font-size: 18px;
   z-index: 1;
   position: relative; }
   .btn--cta i {

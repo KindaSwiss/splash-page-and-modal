@@ -7,8 +7,9 @@
 
 $btn-transition-time: 0.4s
 
-
-/**
+/*
+ * Base style for a button 
+ * 
  * 1. How far to push :after outside it's container. The 
  * purpose of this is to have a few pixels of transparency 
  * before the box shadow. 
@@ -17,17 +18,22 @@ $btn-transition-time: 0.4s
 	$push: -2px // [1] 
 	background: $yellow
 	border: 0
+	color: $color-text
+	cursor: pointer
 	display: inline-block
 	font-family: Roboto Condensed
+	font-size: 1em
 	letter-spacing: 1px 
 	text-decoration: none
 	text-transform: uppercase
+	vertical-align: middle
 	+padding(8px 12px)
 	+position(relative)
 	+transition(box-shadow $btn-transition-time)
 
 	&:link, &:visited
-		color: lighten(black, 20)
+		color: $color-text
+
 
 	// Styles for when the element is tabbed to  
 	&:focus
@@ -85,10 +91,11 @@ $btn-transition-time: 0.4s
  *
  * 3. Must set the property on the element and on focus
  * or else the transition won't work. 
+ * 
  */
 .btn--cta
 	$icon-left: 6px // [1] 
-	font-size: 18px
+	// font-size: 18px
 	z-index: z('default') /* [2] */
 	+position(relative)
 
@@ -104,8 +111,8 @@ $btn-transition-time: 0.4s
 	&:focus i
 		left: $icon-left /* [1] */
 
-
-
+	// Note: Keep in mind that :after styles will 
+	//       not work with input elements 
 
 
 /**
