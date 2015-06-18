@@ -554,22 +554,8 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
  *
  */
 /**
- * The overlay that contains the modal.
- */
-#modal-overlay {
-  background-color: rgba(242, 227, 12, 0.9);
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
-  z-index: 5000;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transition: opacity 0.7s; }
-
-/**
- * This sets up the overlay transitions.
+ * `.modal-overlay` sets up the overlay transitions as well
+ * as the modal transitions
  * When aria-hidden is `false`, the overlay is
  * transitioned from opacity 0 to 1, and the modal
  * is slide/flipped down. The opposite happens when aria-hidden
@@ -583,26 +569,36 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
  *
  *
  */
-.modal-overlay[aria-hidden='false'] {
-  opacity: 1; }
-  .modal-overlay[aria-hidden='false'] .modal {
-    top: 150px;
-    -webkit-transform: rotateX(0deg);
-    -ms-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-    -webkit-transform-origin: center;
-        -ms-transform-origin: center;
-            transform-origin: center; }
-
-.modal-overlay[aria-hidden='true'] {
-  opacity: 0;
-  pointer-events: none; }
-  .modal-overlay[aria-hidden='true'] .modal {
-    -webkit-transform: rotateX(-50deg);
-    -ms-transform: rotateX(-50deg);
-    transform: rotateX(-50deg); }
+.modal-overlay {
+  background-color: rgba(242, 227, 12, 0.9);
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+  z-index: 5000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: opacity 0.7s; }
+  .modal-overlay[aria-hidden='false'] {
+    opacity: 1; }
+    .modal-overlay[aria-hidden='false'] .modal {
+      top: 150px;
+      -webkit-transform: rotateX(0deg);
+      -ms-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+      -webkit-transform-style: preserve-3d;
+              transform-style: preserve-3d;
+      -webkit-transform-origin: center;
+          -ms-transform-origin: center;
+              transform-origin: center; }
+  .modal-overlay[aria-hidden='true'] {
+    opacity: 0;
+    pointer-events: none; }
+    .modal-overlay[aria-hidden='true'] .modal {
+      -webkit-transform: rotateX(-50deg);
+      -ms-transform: rotateX(-50deg);
+      transform: rotateX(-50deg); }
 
 .modal {
   z-index: 5001;
@@ -693,14 +689,14 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
 /**
  * Customize the modal's background here
  */
-#modal--subscribe .modal__container {
+#modal-subscribe .modal__container {
   background-image: url("../images/presentation.png");
   background-position: 140% 60%;
   background-size: 57%;
   background-repeat: no-repeat; }
-  #modal--subscribe .modal__container .modal__header {
+  #modal-subscribe .modal__container .modal__header {
     max-width: 45%; }
-  #modal--subscribe .modal__container .modal__description {
+  #modal-subscribe .modal__container .modal__description {
     max-width: 60%; }
 
 /**
@@ -741,7 +737,7 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   .modal__content .modal__description,
   .modal__content .modal__header {
     max-width: 100%; }
-  #modal--subscribe .modal__container {
+  .modal__container {
     background-image: none; } }
 
 @media screen and (orientation: portrait) and (max-width: 400px), screen and (orientation: landscape) and (max-width: 600px) {

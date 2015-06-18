@@ -1,5 +1,93 @@
-var constants = {
-	ESCAPE_KEY: 27
+
+(function () {
+'use strict';
+
+
+/**
+ * A mixin to create jquery objects from selectors
+ * Example usage:
+ * 		data: {
+ * 			ui: {
+ * 				close: 'btn.close',
+ * 				input: 'input[type=submit]'
+ * 			},
+ * 		}
+ * 
+ * @type {Object}
+ */
+var jui = {
+	attached: function () {
+		if (typeof jQuery !== 'function') {
+			var err = new Error('jui: jQuery is not defined');
+			throw err;
+		}
+
+		// Replace the selectors with jquery objects 
+		_.forIn(this.ui, function (selector, name) {
+			this.ui[name] = jQuery(selector);
+		}, this);
+
+		// Set the attached element as well 
+		this.ui.el = jQuery(this.$el);
+	}
+};
+
+
+
+/**
+ * Listens to the events specified on the window object. 
+ * Multiple methods can be added by separating them with 
+ * a comma. The keys should be the event and should map to 
+ * methods on the vue object. 
+ * 
+ * Usage:
+ * data: {
+ * 		windowEvents: {
+ * 			keydown: 'onKeyDown',
+ * 			focusin: 'checkFocus, refocus'
+ * 		}
+ * } 
+ * 
+ * @type {Object}
+ */
+var windowEvents = {
+	attached: function () {
+		if (typeof jQuery !== 'function') {
+			var err = new Error('jui: jQuery is not defined');
+			throw err;
+		}
+		var $window = jQuery(window);
+
+		/**
+		 * Loop through each of the event names in the windowEvents 
+		 * object and find the associated method function and 
+		 * add it as a listener to the window. 
+		 */
+		
+		_.forIn(this.windowEvents, function (methodNames, eventName) {
+			methodNames = _.map(this.windowEvents[eventName].split(','), _.trim),
+			
+			_.each(methodNames, function (methodName) {
+				/**
+				 * The method on the Vue object
+				 * @name method
+				 * @type {Function}
+				 */
+				var method = this[methodName];
+
+				// If  no method is found, throw an error 
+				if (typeof method !== 'function') {
+					var err = new Error('Vue windowEvents mixin: No method could be found for name ' + methodName);
+					throw err;
+				}
+
+				$window.on(eventName, method);
+			}, this);
+
+		}, this);
+		
+
+	}
 };
 
 
@@ -8,7 +96,12 @@ $(function () {
 	'use strict';
 	var ESCAPE_KEY = 27;
 
-	// https://github.com/Modernizr/Modernizr/pull/924/files
+
+	/**
+	 * https://github.com/Modernizr/Modernizr/pull/924/files
+	 * Does this browser support csspointerevents? 
+	 * @type  {Boolea}
+	 */
 	var csspointerevents = (function () {
 		var element = document.createElement('x');
 		element.style.cssText = 'pointer-events:auto';
@@ -16,8 +109,13 @@ $(function () {
 	}());
 
 
-	var suscribeModal = new Vue({
+	var overlay = new Vue({
 		el: '#modal-overlay',
+
+
+		mixins: [jui, windowEvents],
+
+
 		data: {
 			/**
 			 * Whether or not the modal is showing 
@@ -25,13 +123,35 @@ $(function () {
 			 */
 			showing: false,
 
+
 			/**
 			 * Saves the last focused element before the modal was opened 
 			 * so it can be focused again when the modal closes 
 			 * @type {Element}
 			 */
 			lastActive: null,
+
+
+			/**
+			 * jui mixin turns these into jquery objects 
+			 */
+			ui: {
+				modal: '.modal',
+				input: 'input',
+				close: '.modal__close'
+			},
+
+
+			/**
+			 * Listen to these events on window 
+			 */
+			windowEvents: {
+				keydown: 'escape',
+				focusin: 'checkFocus'
+			},
 		},
+
+
 		methods: {
 
 			
@@ -41,10 +161,8 @@ $(function () {
 			 */
 			hide: function(event) {
 
-				// Append to bottom of DOM to avoid tabbing into them right off the bat 
 				if ( ! event || ~[this.$el, this.ui.close.get(0)].indexOf(event.target)) {
 
-					suscribeModal.$appendTo(document.body);
 					/**
 					 * If CSS pointer events are not supported the element 
 					 * will be hidden. 
@@ -53,14 +171,14 @@ $(function () {
 						this.ui.el.addClass('is-hidden');
 					}
 					this.showing = false;
+					/**
+					 * Resume focus to the last active element before the modal 
+					 * was opened 
+					 */
 					this.lastActive.focus();
-					setTimeout(function () {
-						this.ui.el
-							.attr('tabindex', '-1')
-							.attr('aria-hidden', true);
-
-					}.bind(this), 0);
-
+					this.ui.el
+						.attr('tabindex', '-1')
+						.attr('aria-hidden', true);
 				}
 			},
 
@@ -71,7 +189,6 @@ $(function () {
 			 * @return {void} 
 			 */
 			show: function() {
-				suscribeModal.ui.el.prependTo(document.body);
 				this.ui.el.removeClass('is-hidden');
 				this.showing = true;
 				this.lastActive = document.activeElement;
@@ -94,15 +211,37 @@ $(function () {
 				event.preventDefault();
 				this.hide();
 			},
+
+
+			/**
+			 * Hide the modal when the escape button is pressed 
+			 *
+			 * @param {KeydownEvent} event 
+			 * @return {void} 
+			 */
+			escape: function (event) {
+				if (this.showing && event.which === ESCAPE_KEY) {
+					this.hide();
+				}
+			},
+
+
+			/**
+			 * Check if the modal has lost focus to an element 
+			 * outside of it. If it has, refocus the modal. 
+			 * 
+			 * @param  {FocusinEvent} event 
+			 * @return {void}       
+			 */
+			checkFocus: function (event) {
+				var overlay = this.$el;
+				var contains = $.contains(overlay, event.target) || event.target === overlay;
+				if (this.showing && ! contains) {
+					overlay.focus();
+				}
+			}
 		},
 		attached: function () {
-			var el = $(this.$el);
-			this.ui = {
-				el: el,
-				modal: el.find('.modal'),
-				input: el.find('input').first(),
-				close: el.find('.modal__close')
-			};
 
 			// Add a class of `is-hidden` when the transition has ended 
 			// but only when the element is being hidden 
@@ -117,15 +256,6 @@ $(function () {
 	});
 
 
-	/**
-	 * Hide the modal when the escape button is pressed 
-	 */
-	$('html').on('keydown', function (event) {
-		if (suscribeModal.showing && event.which === ESCAPE_KEY) {
-			suscribeModal.hide();
-		}
-	});
-
 
 	/**
 	 * Whenever the learn more button is clicked, 
@@ -135,18 +265,12 @@ $(function () {
 		el: '#learn-more',
 		methods: {
 			onClick: function () {
-				suscribeModal.show();
+				overlay.show();
 			}
 		}
 	});
-	// Keep focus within the modal 
-	$(window).on('focusin', function (event) {
-		var overlay = suscribeModal.ui.el[0];
-		var contains = $.contains(overlay, event.target) || event.target === overlay;
-		if (suscribeModal.showing && ! contains) {
-			suscribeModal.ui.el.focus();
-		}
-	});
+
 });
 
 
+}()); // wrapping iife

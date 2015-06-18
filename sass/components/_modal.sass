@@ -4,22 +4,12 @@
  * 
  */
 
-/**
- * The overlay that contains the modal. 
- */
-#modal-overlay
-	background-color: rgba($yellow, .9)
-	perspective: 1000px
-	z-index: z('overlay')
-	+position(absolute, 0)
-	+transition(opacity .7s)
-
-
 
 
 
 /**
- * This sets up the overlay transitions. 
+ * `.modal-overlay` sets up the overlay transitions as well 
+ * as the modal transitions 
  * When aria-hidden is `false`, the overlay is 
  * transitioned from opacity 0 to 1, and the modal
  * is slide/flipped down. The opposite happens when aria-hidden 
@@ -34,6 +24,12 @@
  * 
  */
 .modal-overlay
+	background-color: rgba($yellow, .9)
+	perspective: 1000px
+	z-index: z('overlay')
+	+position(absolute, 0)
+	+transition(opacity .7s)
+
 	&[aria-hidden='false']
 		opacity: 1
 		.modal
@@ -145,7 +141,7 @@
 /**
  * Customize the modal's background here 
  */
-#modal--subscribe .modal__container
+#modal-subscribe .modal__container
 	background:
 		image: url('../images/presentation.png')
 		position: 140% 60%
@@ -157,6 +153,12 @@
 
 	.modal__description
 		max-width: 60%
+
+
+
+
+
+
 
 
 
@@ -211,8 +213,10 @@
 		.modal__header
 			max-width: 100%
 
-	#modal--subscribe .modal__container
+	.modal__container
 		background-image: none
+
+
 
 
 
