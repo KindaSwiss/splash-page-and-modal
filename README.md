@@ -23,7 +23,7 @@ The first commit is my first version. For the second version, I had some goals.
 - [Sass](http://sass-lang.com/guide) indented
 - [BEM](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) for CSS class names
 - [Gulp](https://github.com/gulpjs/gulp) For processing Sass files and linting JS
-- [Modernizr](http://modernizr.com/) to detect if pointerevents are defined 
+- [Modernizr](http://modernizr.com/) used a snippet of code from modernizr to detect if pointerevents are supported 
 
 
 ## Things I learned
