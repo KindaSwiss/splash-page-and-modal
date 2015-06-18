@@ -157,6 +157,7 @@ $(function () {
 			
 			/**
 			 * Hide the modal 
+			 * 
 			 * @return {void} 
 			 */
 			hide: function(event) {
@@ -185,7 +186,8 @@ $(function () {
 
 			/**
 			 * Show the modal and focus it so that tabbing will focus the 
-			 * exit button. 
+			 * modal's exit button. 
+			 * 
 			 * @return {void} 
 			 */
 			show: function() {
@@ -204,6 +206,7 @@ $(function () {
 
 			/**
 			 * When the submit button is pressed, hide the modal 
+			 * 
 			 * @param  {Event} event 
 			 * @return {void}
 			 */
@@ -239,22 +242,24 @@ $(function () {
 				if (this.showing && ! contains) {
 					overlay.focus();
 				}
-			}
-		},
-		attached: function () {
+			}, 
 
-			// Add a class of `is-hidden` when the transition has ended 
-			// but only when the element is being hidden 
-			var that = this;
-			this.ui.el.on('transitionend', function (event) {
-				if (event.target !== this) { return; }
+			/**
+			 * Make the overlay `display: none` so that when the 
+			 * element can't be tabbed to after it is transitioned 
+			 * its opacity back to 0. 
+			 * 
+			 * @param  {TransitionEndEvent} event 
+			 * @return {void} 
+			 */
+			transitionend: function (event) {
+				if (event.target !== this.$el) { return; }
 				if ( ! that.showing) {
 					that.ui.el.addClass('is-hidden');
 				}
-			});
+			}
 		},
 	});
-
 
 
 	/**

@@ -35,11 +35,15 @@
 		</h1>
 
 		<div>
-			<a id="learn-more" class="btn btn--cta btn--heavy" 
-				href="#learn-more" v-on="click:onClick">
+			<button 
+				id="learn-more" 
+				class="btn btn--cta btn--heavy" 
+				href="#learn-more" 
+				v-on="click:onClick"
+			>
 				Learn More Now 
 				<i class="btn__icon btn__icon--right ion-ios-arrow-forward"></i>
-			</a>
+			</button>
 		</div>
 	</div>
 
@@ -53,7 +57,7 @@
 		id="modal-overlay" 
 		class="modal-overlay is-hidden" 
 		tabindex="-1" 
-		v-on="click:hide">
+		v-on="click:hide, transitionend: some">
 
 		
 		<div id="modal-subscribe" class="modal">
