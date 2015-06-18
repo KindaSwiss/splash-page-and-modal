@@ -16,7 +16,6 @@ The first commit is my first version. For the second version, I had some goals.
 
 ## Problems
 - On smaller devices, the modal is pushed outside of the overlay, causing the background to peek through.
-- The URL bar can't be focused when the modal is showing. 
 
 ## Tools I Used
 - [VueJS](http://vuejs.org/) for JS
