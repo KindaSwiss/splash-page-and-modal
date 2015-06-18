@@ -539,6 +539,7 @@ button::moz-focus-inner {
  *
  */
 .btn--cta {
+  font-size: 18px;
   z-index: 1;
   position: relative; }
   .btn--cta i {
