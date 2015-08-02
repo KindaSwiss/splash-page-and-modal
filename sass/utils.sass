@@ -1,14 +1,22 @@
 
 
+
 /**
- *  This has the same purpose as `pass` does in python.
- *  It's so I can delcare a selector and not have any properties
+ * util styles
  */
-=pass
-	pass: pass
+.is-hidden, [v-cloak]
+	display: none !important
+.float-right
+	float: right
+.float-left
+	float: left
 
 
 
+
+@each $weight in (100, 200, 300, 400, 500, 600, 700)
+	.w-#{$weight}
+		font-weight: $weight
 
 
 

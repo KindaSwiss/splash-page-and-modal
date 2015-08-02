@@ -1,21 +1,21 @@
 /**
  * file: _button.sass
- * 
- * Contains styles for buttons 
- * 
+ *
+ * Contains styles for buttons
+ *
  */
 
 $btn-transition-time: 0.4s
 
 /*
- * Base style for a button 
- * 
- * 1. How far to push :after outside it's container. The 
- * purpose of this is to have a few pixels of transparency 
- * before the box shadow. 
+ * Base style for a button
+ *
+ * 1. How far to push :after outside it's container. The
+ * purpose of this is to have a few pixels of transparency
+ * before the box shadow.
  */
 .btn
-	$push: -2px // [1] 
+	$push: -2px // [1]
 	background: $yellow
 	border: 0
 	color: $color-text
@@ -23,87 +23,84 @@ $btn-transition-time: 0.4s
 	display: inline-block
 	font-family: Roboto Condensed
 	font-size: 1em
-	letter-spacing: 1px 
+	letter-spacing: 1px
+	padding: 8px 12px
+	position: relative
 	text-decoration: none
 	text-transform: uppercase
+	transition: box-shadow $btn-transition-time
 	vertical-align: middle
-	+padding(8px 12px)
-	+position(relative)
-	+transition(box-shadow $btn-transition-time)
 
 	&:link, &:visited
 		color: $color-text
 
 
-	// Styles for when the element is tabbed to  
+	// Styles for when the element is tabbed to
 	&:focus
 		outline: 0
 	&:focus:after
 		box-shadow: 0 0 0 2px $yellow
 
-	// Styles for when the element is hovered on 
+	// Styles for when the element is hovered on
 	&:after
 		content: ' '
+		transition: box-shadow $btn-transition-time
 		+position(absolute, $push)
-		+transition(box-shadow $btn-transition-time)
+
 	&:hover:after
 		z-index: 2
 		box-shadow: 0 0 0 2px $yellow
 
 
-.btn--heavy
-	font-weight: 700
-
-
-
 
 
 /**
- * 1. Offset the top to make it inline with text 
+ * 1. Offset the top to make it inline with text
  */
 .btn__icon
 	font-size: 1.25em
 	display: inline-block
 	font-weight: bold
-	+position(relative, 2px null null null) /* [1] */ 
-
+	+position(relative, 2px null null null) /* [1] */
 
 /**
- * Push the icon just a tiny bit when on the right of the 
+ * Push the icon just a tiny bit when on the right of the
  * btn's text
  */
 .btn__icon--right
 	margin-left: 4px
 
 
-	
-	
-	
+
+
+
 
 
 /**
- * 1. The inner icon's left position after hover 
- * 
- * 2. The z-index is declared because if the mouse is left 
- * on it when the modal is shown, the cursor will still 
- * be pointer. Putting the z-index lower than the modal 
- * fixes it. 
+ * A call to action button that has an inner icon
+ *
+ * 1. The inner icon's left position after hover
+ *
+ * 2. The z-index is declared because if the mouse is left
+ * on it when the modal is shown, the cursor will still
+ * be pointer. Putting the z-index lower than the modal
+ * fixes it.
  *
  * 3. Must set the property on the element and on focus
- * or else the transition won't work. 
- * 
+ * or else the transition won't work.
+ *
  */
 .btn--cta
-	$icon-left: 6px // [1] 
+	$icon-left: 6px // [1]
 	font-size: 18px
+	position: relative
 	z-index: z('default') /* [2] */
-	+position(relative)
 
-	// Inner icon styles 
+	// Inner icon styles
 	& i
-		position: relative
 		left: 0px /* [3] */
-		+transition(left $btn-transition-time)
+		position: relative
+		transition: left $btn-transition-time
 
 	&:hover i
 		left: $icon-left /* [1] */
@@ -111,16 +108,16 @@ $btn-transition-time: 0.4s
 	&:focus i
 		left: $icon-left /* [1] */
 
-	// Note: Keep in mind that :after styles will 
-	//       not work with input elements 
+
 
 
 /**
- * Make the buttons smaller on smaller screen sizes. 
+ * Make the buttons smaller on smaller screen sizes.
  */
 @media screen and (max-width: 700px)
 	.btn--cta
 		font-size: 16px
+
 @media screen and (max-width: 335px)
 	.btn--cta
 		font-size: 13px

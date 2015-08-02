@@ -1,7 +1,36 @@
 /**
- *  This has the same purpose as `pass` does in python.
- *  It's so I can delcare a selector and not have any properties
+ * util styles
  */
+.is-hidden, [v-cloak] {
+  display: none !important; }
+
+.float-right {
+  float: right; }
+
+.float-left {
+  float: left; }
+
+.w-100 {
+  font-weight: 100; }
+
+.w-200 {
+  font-weight: 200; }
+
+.w-300 {
+  font-weight: 300; }
+
+.w-400 {
+  font-weight: 400; }
+
+.w-500 {
+  font-weight: 500; }
+
+.w-600 {
+  font-weight: 600; }
+
+.w-700 {
+  font-weight: 700; }
+
 /**
  * Disallow text selection
  */
@@ -382,9 +411,9 @@ input[type="email"], input[type="number"], input[type="password"], input[type="s
   border: 0;
   font-family: 'Roboto Condensed';
   letter-spacing: 1px;
-  width: 100%;
+  padding: 8px 16px;
   position: relative;
-  padding: 8px 16px; }
+  width: 100%; }
 
 input,
 button,
@@ -398,18 +427,6 @@ button::moz-focus-inner {
  * file: _layouts.sass
  *
  */
-/**
- * General styles
- */
-.is-hidden, [v-cloak] {
-  display: none !important; }
-
-.float-right {
-  float: right; }
-
-.float-left {
-  float: left; }
-
 /**
  * Styles for the hero
  *
@@ -426,8 +443,8 @@ button::moz-focus-inner {
   display: inline-block;
   font-size: 100px;
   font-weight: 900;
-  text-transform: uppercase;
-  margin: 0; }
+  margin: 0;
+  text-transform: uppercase; }
   .hero__title span {
     background: black;
     display: inline-block;
@@ -481,12 +498,12 @@ button::moz-focus-inner {
   font-family: Roboto Condensed;
   font-size: 1em;
   letter-spacing: 1px;
-  text-decoration: none;
-  text-transform: uppercase;
-  vertical-align: middle;
   padding: 8px 12px;
   position: relative;
-  transition: box-shadow 0.4s; }
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: box-shadow 0.4s;
+  vertical-align: middle; }
   .btn:link, .btn:visited {
     color: #262626; }
   .btn:focus {
@@ -495,18 +512,15 @@ button::moz-focus-inner {
     box-shadow: 0 0 0 2px #f2e30c; }
   .btn:after {
     content: ' ';
+    transition: box-shadow 0.4s;
     position: absolute;
     top: -2px;
     right: -2px;
     bottom: -2px;
-    left: -2px;
-    transition: box-shadow 0.4s; }
+    left: -2px; }
   .btn:hover:after {
     z-index: 2;
     box-shadow: 0 0 0 2px #f2e30c; }
-
-.btn--heavy {
-  font-weight: 700; }
 
 /**
  * 1. Offset the top to make it inline with text
@@ -527,6 +541,8 @@ button::moz-focus-inner {
   margin-left: 4px; }
 
 /**
+ * A call to action button that has an inner icon
+ *
  * 1. The inner icon's left position after hover
  *
  * 2. The z-index is declared because if the mouse is left
@@ -540,11 +556,11 @@ button::moz-focus-inner {
  */
 .btn--cta {
   font-size: 18px;
-  z-index: 1;
-  position: relative; }
+  position: relative;
+  z-index: 1; }
   .btn--cta i {
-    position: relative;
     left: 0px;
+    position: relative;
     transition: left 0.4s; }
   .btn--cta:hover i {
     left: 6px; }
@@ -597,14 +613,8 @@ button::moz-focus-inner {
     opacity: 1; }
     .modal-overlay[aria-hidden='false'] .modal {
       top: 150px;
-      -webkit-transform: rotateX(0deg);
-      -ms-transform: rotateX(0deg);
-      transform: rotateX(0deg);
-      -webkit-transform-style: preserve-3d;
-              transform-style: preserve-3d;
-      -webkit-transform-origin: center;
-          -ms-transform-origin: center;
-              transform-origin: center; }
+      -webkit-transform: rotateX(0deg) preserve-3d center;
+              transform: rotateX(0deg) preserve-3d center; }
   .modal-overlay[aria-hidden='true'] {
     opacity: 0;
     pointer-events: none; }

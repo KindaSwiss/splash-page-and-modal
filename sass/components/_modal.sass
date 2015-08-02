@@ -1,27 +1,27 @@
 
 /**
  * file: _modal.sass
- * 
+ *
  */
 
 
 
 
 /**
- * `.modal-overlay` sets up the overlay transitions as well 
- * as the modal transitions 
- * When aria-hidden is `false`, the overlay is 
+ * `.modal-overlay` sets up the overlay transitions as well
+ * as the modal transitions
+ * When aria-hidden is `false`, the overlay is
  * transitioned from opacity 0 to 1, and the modal
- * is slide/flipped down. The opposite happens when aria-hidden 
- * is set to `true`. 
+ * is slide/flipped down. The opposite happens when aria-hidden
+ * is set to `true`.
  *
  * 1. There is a fallback to pointer events in the javascript
- * file. The fallback is just to set the overlay to display none. 
- * In IE 9, where pointer-events aren't supported, but transitions 
- * are supported, the modal will fade-in/slide/flip, but will not 
- * transition back out. 
- * 
- * 
+ * file. The fallback is just to set the overlay to display none.
+ * In IE 9, where pointer-events aren't supported, but transitions
+ * are supported, the modal will fade-in/slide/flip, but will not
+ * transition back out.
+ *
+ *
  */
 .modal-overlay
 	background-color: rgba($yellow, .9)
@@ -30,13 +30,14 @@
 	+position(absolute, 0)
 	+transition(opacity .7s)
 
+	// Show the modal
 	&[aria-hidden='false']
 		opacity: 1
 		.modal
 			top: 150px
-			+transform(rotateX(0deg))
-			transform-style: preserve-3d
-			transform-origin: center
+			transform: rotateX(0deg) preserve-3d center
+
+	// Hide the modal
 	&[aria-hidden='true']
 		opacity: 0
 		pointer-events: none /* [1] */
@@ -56,8 +57,8 @@
 	+transition(top .7s, transform .7s)
 
 
-/**	
- * The wrapper is where the white background starts  
+/**
+ * The wrapper is where the white background starts
  */
 .modal__wrapper
 	background-color: white
@@ -69,11 +70,11 @@
 /**
  *
  * 1. This calculates the close button to be above the modal,
- * plus little more for extra space. 
+ * plus little more for extra space.
  *
- * 2. This calculates the close button to be passed the right 
- * edge of the modal, plus a litter more for extra space. 
- * 
+ * 2. This calculates the close button to be passed the right
+ * edge of the modal, plus a litter more for extra space.
+ *
  */
 .modal__close
 	$font-size: 1.5rem
@@ -87,14 +88,14 @@
 	+position(absolute, $top $right null null)
 	+transition(right .5s, box-shadow .3s)
 
-	// Gives the close button a black border when it is tabbed to 
+	// Gives the close button a black border when it is tabbed to
 	&:focus
 		box-shadow: 0 0 0 3px rgba(black, 1)
 
 
 /**
- * 1. This is so the background image can show, 
- * if one is defined. 
+ * 1. This is so the background image can show,
+ * if one is defined.
  */
 .modal__content
 	$margin: 30px
@@ -104,7 +105,7 @@
 	.modal__header
 		font-weight: 600
 		font-size: 1.3rem
-		margin-bottom: $margin 
+		margin-bottom: $margin
 
 	.modal__description
 		color: lighten(black, 40)
@@ -114,8 +115,8 @@
 
 
 /**
- * 1. The clearfix is added because the button is floated right 
- * 
+ * 1. The clearfix is added because the button is floated right
+ *
  */
 .modal__form
 	background-color: black
@@ -127,19 +128,19 @@
 		+padding(12px 30px)
 
 	input
-		max-width: 72.5% 
+		max-width: 72.5%
 		display: inline-block
 		+transition(box-shadow .17s ease-in)
 		&:focus
 			box-shadow: 0 0 0 2px black, 0 0 0 4px $yellow
 			outline: 0
-		
+
 
 
 
 
 /**
- * Customize the modal's background here 
+ * Customize the modal's background here
  */
 .modal-suscribe-container
 	background:
@@ -167,20 +168,20 @@
 
 
 /**
- * Move the close button to the top of the modal 
+ * Move the close button to the top of the modal
  */
 @media screen and (max-width: 650px)
 	.modal__close
-		+position(null, (1.5rem * -1) - .5 0px null null) 
+		+position(null, (1.5rem * -1) - .5 0px null null)
 
 
 
 
 @media screen and (max-width: 650px)
 	/**
-	 * Put the input and button on separate lines 
-	 * The input should go full width of the form 
-	 * but the button should be the same size 
+	 * Put the input and button on separate lines
+	 * The input should go full width of the form
+	 * but the button should be the same size
 	 */
 	.modal__form
 		max-width: 100%
@@ -189,10 +190,10 @@
 			display: block
 		button
 			margin-top: 20px
-			
+
 
 /**
- * Now make the submit button full width 
+ * Now make the submit button full width
  */
 @media screen and (max-width: 400px)
 	.modal__form
@@ -203,13 +204,13 @@
 
 
 /**
- * Make the header and description full width and 
- * remove the background image. 
+ * Make the header and description full width and
+ * remove the background image.
  */
 @media screen and (max-width: 571px)
 
 	.modal__content
-		.modal__description, 
+		.modal__description,
 		.modal__header
 			max-width: 100%
 
@@ -220,9 +221,9 @@
 
 
 
-// Move the modal to the top or else the modal will 
-// go outside of the overlay, causing the overlay to not 
-// cover all of the background 
+// Move the modal to the top or else the modal will
+// go outside of the overlay, causing the overlay to not
+// cover all of the background
 @media screen and (orientation: portrait) and (max-width: 400px), screen and (orientation: landscape) and (max-width: 600px)
 	.modal
 		top: 50px !important
